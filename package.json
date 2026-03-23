@@ -5,6 +5,11 @@
   "type": "module",
   "scripts": {
     "selftest": "bash scripts/selftest.sh",
-    "build": "tsonic build"
-  }
+    "build": "tsonic build",
+    "dev": "tsonic run"
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "devDependencies": {}
 }

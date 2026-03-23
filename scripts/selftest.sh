@@ -85,8 +85,10 @@ export function main(): void {
   const rounded = Math.round(42.7);
   const epoch = Date.parse("2024-01-01T00:00:00Z");
   const now: long = Date.now();
+  const truthy = Boolean(1);
+  const falsey = Boolean(0);
 
-  console.log(`${parsed},${parsedFloat},${finite},${nan},${rounded},${epoch > 0},${now > 0}`);
+  console.log(`${parsed},${parsedFloat},${finite},${nan},${rounded},${epoch > 0},${now > 0},${truthy.toString()},${String(falsey)}`);
 }
 EOF
 
@@ -108,6 +110,6 @@ OUTPUT="$(
     | sed '/^Running /d;/^Process exited with code /d;/^─/d;/^$/d' \
     | tail -n 1
 )"
-[ "$OUTPUT" = "42,42.5,true,true,43,true,true" ]
+[ "$OUTPUT" = "42,42.5,true,true,43,true,true,true,false" ]
 
 echo "js-next selftest passed"
