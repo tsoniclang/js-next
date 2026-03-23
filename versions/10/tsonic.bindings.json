@@ -1,0 +1,18 @@
+{
+  "bindingVersion": 1,
+  "packageName": "@tsonic/js",
+  "surfaceMode": "@tsonic/js",
+  "assemblyName": "Tsonic.JSRuntime",
+  "runtimePackages": [
+    "@tsonic/js"
+  ],
+  "dotnet": {
+    "packageReferences": [
+      {
+        "id": "Tsonic.JSRuntime",
+        "version": "0.0.9",
+        "types": "@tsonic/js"
+      }
+    ]
+  }
+}

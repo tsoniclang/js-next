@@ -1,0 +1,52 @@
+{
+  "name": "@tsonic/js",
+  "version": "10.0.49-next.0",
+  "description": "Native Tsonic implementation of JavaScript runtime globals",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./index.d.ts",
+      "default": "./index.js"
+    },
+    "./Boolean.js": "./src/Boolean.ts",
+    "./console.js": "./src/console.ts",
+    "./Globals.js": "./src/Globals.ts",
+    "./Math.js": "./src/Math.ts",
+    "./Date.js": "./src/Date.ts",
+    "./Number.js": "./src/Number.ts",
+    "./String.js": "./src/String.ts"
+  },
+  "files": [
+    "**/*.d.ts",
+    "**/*.js",
+    "src/**/*.ts",
+    "**/bindings.json",
+    "families.json",
+    "tsonic/package-manifest.json",
+    "tsonic.bindings.json",
+    "tsonic.surface.json",
+    "README.md",
+    "LICENSE"
+  ],
+  "type": "module",
+  "keywords": [
+    "javascript",
+    "typescript",
+    "tsonic",
+    "dotnet",
+    "source-package",
+    "native",
+    "net10"
+  ],
+  "author": "Tsonic Team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tsoniclang/js.git"
+  },
+  "dependencies": {
+    "@tsonic/dotnet": "10.0.40",
+    "@tsonic/core": "10.0.40"
+  }
+}
