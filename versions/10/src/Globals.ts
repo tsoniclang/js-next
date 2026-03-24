@@ -1,10 +1,10 @@
-/// <reference path="../globals.d.ts" />
 
 import type {} from "./type-bootstrap.js";
 
 import {
   Convert,
   Double,
+  TypeCode,
   Uri,
 } from "@tsonic/dotnet/System.js";
 import {
@@ -13,6 +13,29 @@ import {
 } from "@tsonic/dotnet/System.Globalization.js";
 
 const nan = (): number => Double.NaN;
+
+const toNumericValue = (value: unknown): number => {
+  return Convert.ToDouble(value, CultureInfo.InvariantCulture);
+};
+
+const isNumericValue = (value: unknown): boolean => {
+  switch (Convert.GetTypeCode(value)) {
+    case TypeCode.SByte:
+    case TypeCode.Byte:
+    case TypeCode.Int16:
+    case TypeCode.UInt16:
+    case TypeCode.Int32:
+    case TypeCode.UInt32:
+    case TypeCode.Int64:
+    case TypeCode.UInt64:
+    case TypeCode.Single:
+    case TypeCode.Double:
+    case TypeCode.Decimal:
+      return true;
+    default:
+      return false;
+  }
+};
 
 const digitValue = (ch: string): number => {
   if (ch >= "0" && ch <= "9") {
@@ -98,8 +121,8 @@ export const Number = (value?: unknown): number => {
     return 0;
   }
 
-  if (typeof value === "number") {
-    return value;
+  if (isNumericValue(value)) {
+    return toNumericValue(value);
   }
 
   if (typeof value === "boolean") {
@@ -127,12 +150,20 @@ export const Number = (value?: unknown): number => {
     }
   }
 
-  return nan();
+  try {
+    return toNumericValue(value);
+  } catch {
+    return nan();
+  }
 };
 
 export const String = (value?: unknown): string => {
-  if (value === undefined || value === null) {
+  if (value === undefined) {
     return "undefined";
+  }
+
+  if (value === null) {
+    return "null";
   }
 
   if (typeof value === "string") {
@@ -143,20 +174,21 @@ export const String = (value?: unknown): string => {
     return value ? "true" : "false";
   }
 
-  if (typeof value === "number") {
-    if (Double.IsNaN(value)) {
+  if (isNumericValue(value)) {
+    const numericValue = toNumericValue(value);
+    if (Double.IsNaN(numericValue)) {
       return "NaN";
     }
-    if (Double.IsPositiveInfinity(value)) {
+    if (Double.IsPositiveInfinity(numericValue)) {
       return "Infinity";
     }
-    if (Double.IsNegativeInfinity(value)) {
+    if (Double.IsNegativeInfinity(numericValue)) {
       return "-Infinity";
     }
-    return Convert.ToString(value, CultureInfo.InvariantCulture) ?? "";
+    return Convert.ToString(numericValue, CultureInfo.InvariantCulture) ?? "";
   }
 
-  return `${value}`;
+  return Convert.ToString(value) ?? "";
 };
 
 export const Boolean = (value?: unknown): boolean => {
@@ -172,8 +204,9 @@ export const Boolean = (value?: unknown): boolean => {
     return value.length > 0;
   }
 
-  if (typeof value === "number") {
-    return !Double.IsNaN(value) && value !== 0;
+  if (isNumericValue(value)) {
+    const numericValue = toNumericValue(value);
+    return !Double.IsNaN(numericValue) && numericValue !== 0;
   }
 
   return true;

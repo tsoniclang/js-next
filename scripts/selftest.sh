@@ -76,29 +76,35 @@ APP_PATH="$WORK_DIR/packages/$PROJECT_NAME/src/App.ts"
 
 cat >"$APP_PATH" <<'EOF'
 import type { long } from "@tsonic/core/types.js";
-import * as ProcessKeepAlive from "@tsonic/js/ProcessKeepAlive.js";
+import {
+  Date as JSDate,
+  Math as JSMath,
+  console as JSConsole,
+} from "@tsonic/js";
 
 export function main(): void {
   const parsed = parseInt("42");
   const parsedFloat = parseFloat("42.5");
   const finite = isFinite(parsedFloat);
   const nan = isNaN(parseFloat("not-a-number"));
-  const rounded = Math.round(42.7);
-  const epoch = Date.parse("2024-01-01T00:00:00Z");
-  const now: long = Date.now();
+  const rounded = JSMath.round(42.7);
+  const epoch = JSDate.parse("2024-01-01T00:00:00Z");
+  const now: long = JSDate.now();
   const truthy = Boolean(1);
   const falsey = Boolean(0);
   const bytes = new Uint8Array([1, 2, 3]);
-  const map = new Map<string, number>([["answer", 42]]);
-  const set = new Set<number>([1, 2, 3]);
-  ProcessKeepAlive.Acquire();
-  ProcessKeepAlive.Release();
+  const map = new Map<string, number>();
+  map.set("answer", 42);
+  const set = new Set<number>();
+  set.add(1);
+  set.add(2);
+  set.add(3);
 
   if (bytes.length !== 3) throw new Error("bad bytes");
   if (map.get("answer") !== 42) throw new Error("bad map");
   if (set.size !== 3) throw new Error("bad set");
 
-  console.log(`${parsed},${parsedFloat},${finite},${nan},${rounded},${epoch > 0},${now > 0},${truthy.toString()},${String(falsey)}`);
+  JSConsole.log(`${parsed},${parsedFloat},${finite},${nan},${rounded},${epoch > 0},${now > 0},${truthy.toString()},${String(falsey)}`);
 }
 EOF
 

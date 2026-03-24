@@ -1,23 +1,23 @@
 import type { int, long } from "@tsonic/core/types.js";
 import type {
-  ArrayBuffer as JSRuntimeArrayBuffer,
-  Date as JSRuntimeDate,
-  Error as JSRuntimeError,
-  Float32Array as JSRuntimeFloat32Array,
-  Float64Array as JSRuntimeFloat64Array,
-  Int16Array as JSRuntimeInt16Array,
-  Int32Array as JSRuntimeInt32Array,
-  Int8Array as JSRuntimeInt8Array,
-  Uint16Array as JSRuntimeUint16Array,
-  Uint32Array as JSRuntimeUint32Array,
-  Uint8Array as JSRuntimeUint8Array,
-  Uint8ClampedArray as JSRuntimeUint8ClampedArray,
-  WeakMap as JSRuntimeWeakMap,
-  WeakSet as JSRuntimeWeakSet,
+  ArrayBuffer as NativeArrayBuffer,
+  Date as NativeDate,
+  Error as NativeError,
+  Float32Array as NativeFloat32Array,
+  Float64Array as NativeFloat64Array,
+  Int16Array as NativeInt16Array,
+  Int32Array as NativeInt32Array,
+  Int8Array as NativeInt8Array,
+  Uint16Array as NativeUint16Array,
+  Uint32Array as NativeUint32Array,
+  Uint8Array as NativeUint8Array,
+  Uint8ClampedArray as NativeUint8ClampedArray,
+  WeakMap as NativeWeakMap,
+  WeakSet as NativeWeakSet,
 } from "./index/internal/index.js";
 
 declare global {
-  interface Error extends JSRuntimeError {
+  interface Error extends NativeError {
   }
 
   interface ErrorConstructor {
@@ -271,37 +271,37 @@ declare global {
     of<T>(...items: T[]): T[];
   }
 
-  interface Date extends JSRuntimeDate {
+  interface Date extends NativeDate {
   }
 
-  interface Uint8Array extends JSRuntimeUint8Array {
+  interface Uint8Array extends NativeUint8Array {
   }
 
-  interface ArrayBuffer extends JSRuntimeArrayBuffer {
+  interface ArrayBuffer extends NativeArrayBuffer {
   }
 
-  interface Int8Array extends JSRuntimeInt8Array {
+  interface Int8Array extends NativeInt8Array {
   }
 
-  interface Uint8ClampedArray extends JSRuntimeUint8ClampedArray {
+  interface Uint8ClampedArray extends NativeUint8ClampedArray {
   }
 
-  interface Int16Array extends JSRuntimeInt16Array {
+  interface Int16Array extends NativeInt16Array {
   }
 
-  interface Uint16Array extends JSRuntimeUint16Array {
+  interface Uint16Array extends NativeUint16Array {
   }
 
-  interface Int32Array extends JSRuntimeInt32Array {
+  interface Int32Array extends NativeInt32Array {
   }
 
-  interface Uint32Array extends JSRuntimeUint32Array {
+  interface Uint32Array extends NativeUint32Array {
   }
 
-  interface Float32Array extends JSRuntimeFloat32Array {
+  interface Float32Array extends NativeFloat32Array {
   }
 
-  interface Float64Array extends JSRuntimeFloat64Array {
+  interface Float64Array extends NativeFloat64Array {
   }
 
   interface DateConstructor {
@@ -434,14 +434,14 @@ declare global {
     new<T = unknown>(values?: readonly T[] | null): Set<T>;
   }
 
-  interface WeakMap<K extends object, V> extends JSRuntimeWeakMap<K, V> {
+  interface WeakMap<K extends object, V> extends NativeWeakMap<K, V> {
   }
 
   interface WeakMapConstructor {
     new<K extends object, V>(entries?: readonly (readonly [K, V])[] | null): WeakMap<K, V>;
   }
 
-  interface WeakSet<T extends object> extends JSRuntimeWeakSet<T> {
+  interface WeakSet<T extends object> extends NativeWeakSet<T> {
   }
 
   interface WeakSetConstructor {

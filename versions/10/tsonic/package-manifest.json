@@ -22,13 +22,12 @@
   },
   "source": {
     "exports": {
+      ".": "./src/index.ts",
       "./Boolean.js": "./src/Boolean.ts",
       "./console.js": "./src/console.ts",
-      "./DateInstance.js": "./src/DateInstance.ts",
       "./Globals.js": "./src/Globals.ts",
       "./Math.js": "./src/Math.ts",
-      "./ProcessKeepAlive.js": "./src/ProcessKeepAlive.ts",
-      "./Date.js": "./src/Date.ts",
+      "./Date.js": "./src/date-module.ts",
       "./Number.js": "./src/Number.ts",
       "./String.js": "./src/String.ts"
     }
