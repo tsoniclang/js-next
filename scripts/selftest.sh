@@ -87,6 +87,13 @@ export function main(): void {
   const now: long = Date.now();
   const truthy = Boolean(1);
   const falsey = Boolean(0);
+  const bytes = new Uint8Array([1, 2, 3]);
+  const map = new Map<string, number>([["answer", 42]]);
+  const set = new Set<number>([1, 2, 3]);
+
+  if (bytes.length !== 3) throw new Error("bad bytes");
+  if (map.get("answer") !== 42) throw new Error("bad map");
+  if (set.size !== 3) throw new Error("bad set");
 
   console.log(`${parsed},${parsedFloat},${finite},${nan},${rounded},${epoch > 0},${now > 0},${truthy.toString()},${String(falsey)}`);
 }
@@ -100,8 +107,8 @@ if [ -z "$ASSETS_FILE" ]; then
   exit 1
 fi
 
-if rg -q "Tsonic\\.JSRuntime" "$ASSETS_FILE"; then
-  echo "Unexpected Tsonic.JSRuntime package reference in $ASSETS_FILE" >&2
+if ! rg -q "Tsonic\\.JSRuntime" "$ASSETS_FILE"; then
+  echo "Expected Tsonic.JSRuntime package reference in $ASSETS_FILE" >&2
   exit 1
 fi
 

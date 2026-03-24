@@ -1,7 +1,29 @@
 import type { int, long } from "@tsonic/core/types.js";
-import type { Date as JSRuntimeDate, Uint8Array as JSRuntimeUint8Array } from "./index/internal/index.js";
+import type {
+  ArrayBuffer as JSRuntimeArrayBuffer,
+  Date as JSRuntimeDate,
+  Error as JSRuntimeError,
+  Float32Array as JSRuntimeFloat32Array,
+  Float64Array as JSRuntimeFloat64Array,
+  Int16Array as JSRuntimeInt16Array,
+  Int32Array as JSRuntimeInt32Array,
+  Int8Array as JSRuntimeInt8Array,
+  Uint16Array as JSRuntimeUint16Array,
+  Uint32Array as JSRuntimeUint32Array,
+  Uint8Array as JSRuntimeUint8Array,
+  Uint8ClampedArray as JSRuntimeUint8ClampedArray,
+  WeakMap as JSRuntimeWeakMap,
+  WeakSet as JSRuntimeWeakSet,
+} from "./index/internal/index.js";
 
 declare global {
+  interface Error extends JSRuntimeError {
+  }
+
+  interface ErrorConstructor {
+    new(message?: string): Error;
+  }
+
   class RangeError extends Error {
     constructor(message?: string);
   }
@@ -255,6 +277,33 @@ declare global {
   interface Uint8Array extends JSRuntimeUint8Array {
   }
 
+  interface ArrayBuffer extends JSRuntimeArrayBuffer {
+  }
+
+  interface Int8Array extends JSRuntimeInt8Array {
+  }
+
+  interface Uint8ClampedArray extends JSRuntimeUint8ClampedArray {
+  }
+
+  interface Int16Array extends JSRuntimeInt16Array {
+  }
+
+  interface Uint16Array extends JSRuntimeUint16Array {
+  }
+
+  interface Int32Array extends JSRuntimeInt32Array {
+  }
+
+  interface Uint32Array extends JSRuntimeUint32Array {
+  }
+
+  interface Float32Array extends JSRuntimeFloat32Array {
+  }
+
+  interface Float64Array extends JSRuntimeFloat64Array {
+  }
+
   interface DateConstructor {
     new(): Date;
     new(value: string | number | long): Date;
@@ -265,6 +314,58 @@ declare global {
   interface Uint8ArrayConstructor {
     new(length: number): Uint8Array;
     new(values: Iterable<number> | ArrayLike<number>): Uint8Array;
+  }
+
+  interface ArrayBufferConstructor {
+    new(byteLength: number): ArrayBuffer;
+  }
+
+  interface Int8ArrayConstructor {
+    new(length: number): Int8Array;
+    new(values: Iterable<number> | ArrayLike<number>): Int8Array;
+    readonly BYTES_PER_ELEMENT: number;
+  }
+
+  interface Uint8ClampedArrayConstructor {
+    new(length: number): Uint8ClampedArray;
+    new(values: Iterable<number> | ArrayLike<number>): Uint8ClampedArray;
+    readonly BYTES_PER_ELEMENT: number;
+  }
+
+  interface Int16ArrayConstructor {
+    new(length: number): Int16Array;
+    new(values: Iterable<number> | ArrayLike<number>): Int16Array;
+    readonly BYTES_PER_ELEMENT: number;
+  }
+
+  interface Uint16ArrayConstructor {
+    new(length: number): Uint16Array;
+    new(values: Iterable<number> | ArrayLike<number>): Uint16Array;
+    readonly BYTES_PER_ELEMENT: number;
+  }
+
+  interface Int32ArrayConstructor {
+    new(length: number): Int32Array;
+    new(values: Iterable<number> | ArrayLike<number>): Int32Array;
+    readonly BYTES_PER_ELEMENT: number;
+  }
+
+  interface Uint32ArrayConstructor {
+    new(length: number): Uint32Array;
+    new(values: Iterable<number> | ArrayLike<number>): Uint32Array;
+    readonly BYTES_PER_ELEMENT: number;
+  }
+
+  interface Float32ArrayConstructor {
+    new(length: number): Float32Array;
+    new(values: Iterable<number> | ArrayLike<number>): Float32Array;
+    readonly BYTES_PER_ELEMENT: number;
+  }
+
+  interface Float64ArrayConstructor {
+    new(length: number): Float64Array;
+    new(values: Iterable<number> | ArrayLike<number>): Float64Array;
+    readonly BYTES_PER_ELEMENT: number;
   }
 
   interface JSON {
@@ -333,11 +434,27 @@ declare global {
     new<T = unknown>(values?: readonly T[] | null): Set<T>;
   }
 
+  interface WeakMap<K extends object, V> extends JSRuntimeWeakMap<K, V> {
+  }
+
+  interface WeakMapConstructor {
+    new<K extends object, V>(entries?: readonly (readonly [K, V])[] | null): WeakMap<K, V>;
+  }
+
+  interface WeakSet<T extends object> extends JSRuntimeWeakSet<T> {
+  }
+
+  interface WeakSetConstructor {
+    new<T extends object = object>(values?: readonly T[] | null): WeakSet<T>;
+  }
+
   interface ObjectConstructor {
     entries(obj: unknown): [string, unknown][];
     keys(obj: unknown): string[];
     values(obj: unknown): unknown[];
   }
+
+  const Error: ErrorConstructor;
 
   const String: StringConstructor;
 
@@ -349,7 +466,25 @@ declare global {
 
   const Date: DateConstructor;
 
+  const ArrayBuffer: ArrayBufferConstructor;
+
+  const Int8Array: Int8ArrayConstructor;
+
   const Uint8Array: Uint8ArrayConstructor;
+
+  const Uint8ClampedArray: Uint8ClampedArrayConstructor;
+
+  const Int16Array: Int16ArrayConstructor;
+
+  const Uint16Array: Uint16ArrayConstructor;
+
+  const Int32Array: Int32ArrayConstructor;
+
+  const Uint32Array: Uint32ArrayConstructor;
+
+  const Float32Array: Float32ArrayConstructor;
+
+  const Float64Array: Float64ArrayConstructor;
 
   const JSON: JSON;
 
@@ -361,11 +496,23 @@ declare global {
 
   const Set: SetConstructor;
 
+  const WeakMap: WeakMapConstructor;
+
+  const WeakSet: WeakSetConstructor;
+
   const Object: ObjectConstructor;
 
   function parseInt(str: string, radix?: number): number;
 
   function parseFloat(str: string): number;
+
+  function decodeURI(uri: string): string;
+
+  function decodeURIComponent(component: string): string;
+
+  function encodeURI(uri: string): string;
+
+  function encodeURIComponent(component: string): string;
 
   function isFinite(value: number): boolean;
 

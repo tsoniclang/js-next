@@ -7,6 +7,19 @@
   "requiredTypeRoots": [
     "."
   ],
+  "runtime": {
+    "runtimePackages": [
+      "@tsonic/js"
+    ]
+  },
+  "dotnet": {
+    "packageReferences": [
+      {
+        "id": "Tsonic.JSRuntime",
+        "version": "0.0.9"
+      }
+    ]
+  },
   "source": {
     "exports": {
       "./Boolean.js": "./src/Boolean.ts",
