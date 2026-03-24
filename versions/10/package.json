@@ -13,6 +13,7 @@
     "./console.js": "./src/console.ts",
     "./Globals.js": "./src/Globals.ts",
     "./Math.js": "./src/Math.ts",
+    "./ProcessKeepAlive.js": "./src/ProcessKeepAlive.ts",
     "./Date.js": "./src/Date.ts",
     "./Number.js": "./src/Number.ts",
     "./String.js": "./src/String.ts"

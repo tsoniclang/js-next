@@ -226,21 +226,20 @@ export const slice = (
   end?: int
 ): string => {
   const lengthValue = getLength(value);
-  const actualStart =
+  const actualStart: int =
     start < 0
-      ? DotnetMath.Max(0 as int, lengthValue + start)
-      : DotnetMath.Min(start, lengthValue);
-  const actualEnd =
+      ? clamp(lengthValue + start, 0 as int, lengthValue)
+      : clamp(start, 0 as int, lengthValue);
+  const actualEnd: int =
     end === undefined
       ? lengthValue
       : end < 0
-        ? DotnetMath.Max(0 as int, lengthValue + end)
-        : DotnetMath.Min(end, lengthValue);
+        ? clamp(lengthValue + end, 0 as int, lengthValue)
+        : clamp(end, 0 as int, lengthValue);
+  const sliceLength: int =
+    actualEnd > actualStart ? actualEnd - actualStart : (0 as int);
 
-  return asDotnetString(value).Substring(
-    actualStart,
-    DotnetMath.Max(0 as int, actualEnd - actualStart)
-  );
+  return asDotnetString(value).Substring(actualStart, sliceLength);
 };
 
 export const split = (
@@ -250,10 +249,12 @@ export const split = (
 ): string[] => {
   if (separator === "") {
     const chars = new List<string>();
-    const maxLength =
+    const maxLength: int =
       limit === undefined
         ? getLength(value)
-        : DotnetMath.Min(getLength(value), limit);
+        : limit < getLength(value)
+          ? limit
+          : getLength(value);
     for (let i = 0 as int; i < maxLength; i += 1) {
       chars.Add(charAt(value, i));
     }

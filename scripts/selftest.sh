@@ -76,6 +76,7 @@ APP_PATH="$WORK_DIR/packages/$PROJECT_NAME/src/App.ts"
 
 cat >"$APP_PATH" <<'EOF'
 import type { long } from "@tsonic/core/types.js";
+import * as ProcessKeepAlive from "@tsonic/js/ProcessKeepAlive.js";
 
 export function main(): void {
   const parsed = parseInt("42");
@@ -90,6 +91,8 @@ export function main(): void {
   const bytes = new Uint8Array([1, 2, 3]);
   const map = new Map<string, number>([["answer", 42]]);
   const set = new Set<number>([1, 2, 3]);
+  ProcessKeepAlive.Acquire();
+  ProcessKeepAlive.Release();
 
   if (bytes.length !== 3) throw new Error("bad bytes");
   if (map.get("answer") !== 42) throw new Error("bad map");
