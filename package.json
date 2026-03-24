@@ -1,0 +1,15 @@
+{
+  "name": "@tsonic/js-next-repo",
+  "private": true,
+  "description": "Native Tsonic implementation of @tsonic/js",
+  "type": "module",
+  "scripts": {
+    "selftest": "bash scripts/selftest.sh",
+    "build": "tsonic build",
+    "dev": "tsonic run"
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "devDependencies": {}
+}
